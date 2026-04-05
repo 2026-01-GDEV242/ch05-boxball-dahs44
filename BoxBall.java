@@ -24,7 +24,7 @@ import java.awt.geom.*;
 
 public class BoxBall
 {
-    private Box myBox;
+   private static final int GRAVITY = 3; 
 
     private Ellipse2D.Double circle;    // represents the ball
     private Color color;        // color of the ball (can be rgb value)
@@ -32,8 +32,10 @@ public class BoxBall
     private int xPosition;      // horizontal position of bounding square
     private int yPosition;      // vertical position of bounding square
     private Canvas canvas;
+    private Box box;
     private int ySpeed;         // vertical speed
     private int xSpeed;         // horizontal speed
+    private int ballDegradation = 2;
 
     /**
      * Constructor for objects of class BoxBall
@@ -46,14 +48,14 @@ public class BoxBall
      * @param drawingCanvas  the canvas to draw this ball on
      */
     public BoxBall(int xPos, int yPos, int ballDiameter, Color ballColor,
-                        Box box, Canvas drawingCanvas)
+                        Box myBox, Canvas myCanvas)
     {
         xPosition = xPos;
         yPosition = yPos;
         color = ballColor;
         diameter = ballDiameter;
-
-        canvas = drawingCanvas;
+        canvas = myCanvas;
+        box = myBox;
     }
 
     /**
@@ -72,21 +74,47 @@ public class BoxBall
     {
         canvas.eraseCircle(xPosition, yPosition, diameter);
     }    
-
+    
     /**
      * Move this ball according to its position and speed and redraw.
      **/
     public void move()
     {
         // remove from canvas at the current position
+        int leftWall = box.getLeftWall();
+        int rightWall = box.getRightWall();
+        int topWall = box.getTopWall();
+        int bottomWall = box.getBottomWall();
+
         erase();
             
         // compute new position
-  
+        ySpeed += GRAVITY;
+        yPosition += ySpeed;
+        xPosition +=2;
+
         // figure out if it has hit the left or right wall
-        
+         if (xPosition >= (leftWall - diameter) && xSpeed > 0) 
+              {
+                        xPosition = (int)(leftWall - diameter);
+                        xSpeed = -xSpeed + ballDegradation; 
+              }
+         else if (xPosition >= (rightWall - diameter) && xSpeed > 0)
+              {
+                        xPosition = (int)(rightWall - diameter);
+                        xSpeed = -xSpeed + ballDegradation; 
+              }
         // figure out if it has hit the top or bottom wall
-        
+         if (yPosition >= (topWall - diameter) && ySpeed > 0) 
+              {
+                        yPosition = (int)(topWall - diameter);
+                        ySpeed = -ySpeed + ballDegradation; 
+              }
+         else if (yPosition >= (bottomWall - diameter) && ySpeed > 0)
+              {
+                        yPosition = (int)(bottomWall - diameter);
+                        ySpeed = -ySpeed + ballDegradation; 
+              }
         draw();
     }    
 
