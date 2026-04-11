@@ -81,38 +81,33 @@ public class BoxBall
     public void move()
     {
         // remove from canvas at the current position
-        int leftWall = box.getLeftWall();
-        int rightWall = box.getRightWall();
-        int topWall = box.getTopWall();
-        int bottomWall = box.getBottomWall();
-
         erase();
             
         // compute new position
         ySpeed += GRAVITY;
         yPosition += ySpeed;
-        xPosition +=2;
+        xPosition += 2;
 
         // figure out if it has hit the left or right wall
-         if (xPosition >= (leftWall - diameter) && xSpeed > 0) 
+         if (xPosition >= (0 - diameter) && xSpeed > 0) 
               {
-                        xPosition = (int)(leftWall - diameter);
+                        xPosition = (int)(100 - diameter);
                         xSpeed = -xSpeed + ballDegradation; 
               }
-         else if (xPosition >= (rightWall - diameter) && xSpeed > 0)
+         else if (xPosition >= (0 - diameter) && xSpeed > 0)
               {
-                        xPosition = (int)(rightWall - diameter);
+                        xPosition = (int)(100 - diameter);
                         xSpeed = -xSpeed + ballDegradation; 
               }
         // figure out if it has hit the top or bottom wall
-         if (yPosition >= (topWall - diameter) && ySpeed > 0) 
+         if (yPosition >= (400 - diameter) && ySpeed > 0) 
               {
-                        yPosition = (int)(topWall - diameter);
+                        yPosition = (int)(400 - diameter);
                         ySpeed = -ySpeed + ballDegradation; 
               }
-         else if (yPosition >= (bottomWall - diameter) && ySpeed > 0)
+         else if (yPosition >= (400 - diameter) && ySpeed > 0)
               {
-                        yPosition = (int)(bottomWall - diameter);
+                        yPosition = (int)(400 - diameter);
                         ySpeed = -ySpeed + ballDegradation; 
               }
         draw();
