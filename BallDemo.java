@@ -16,15 +16,6 @@ public class BallDemo
     private Random randomGenerator;
     private Color color;
     private BoxBall ball1;
-    private BoxBall ball2;
-    private BoxBall ball3;
-    private BoxBall ball4;
-    private BoxBall ball5;
-    private BoxBall ball6;
-    private BoxBall ball7;
-    private BoxBall ball8;
-    private BoxBall ball9;
-    private BoxBall ball10;
 
     /**
      * Create a BallDemo object. Creates a fresh canvas and makes it visible.
@@ -54,14 +45,12 @@ public class BallDemo
         int yPos;
         int ballDiam;
         Color customColor;
-        
-        int ground = 400;   // position of the ground line
+        Box myBox= new Box (100,100,500,400, myCanvas);
 
         myCanvas.setVisible(true);
 
         // draw the ground
         myCanvas.setForegroundColor(Color.BLACK);
-        myCanvas.drawLine(50, ground, 550, ground);
 
         // create and show the balls
         for (int i = 0; i < ballNumber; i++)
@@ -73,57 +62,10 @@ public class BallDemo
            int b = randomGenerator.nextInt(225);
            int g = randomGenerator.nextInt(225); 
            customColor = new Color(r, b, g);
-           if (i == 0)
-           {
-             ball1 = new BoxBall(xPos, yPos, ballDiam, customColor, myBox, myCanvas);
+           
+             ball1 = new BoxBall(250, 250, ballDiam, customColor, myBox, myCanvas);
              ball1.draw();
-           }
-           else if (i == 1)
-           {
-             ball2 = new BoxBall(xPos, yPos, ballDiam, customColor, myBox, myCanvas);
-             ball2.draw();
-           }
-           else if (i == 2)
-           {
-             ball3 = new BoxBall(xPos, yPos, ballDiam, customColor, myBox, myCanvas);
-             ball3.draw();
-           }
-           else if (i == 3)
-           {
-             ball4 = new BoxBall(xPos, yPos, ballDiam, customColor, myBox, myCanvas);
-             ball4.draw();
-           }
-           else if (i == 4)
-           {
-             ball5 = new BoxBall(xPos, yPos, ballDiam, customColor, myBox, myCanvas);
-             ball5.draw();
-           }
-           else if (i == 5)
-           {
-             ball6 = new BoxBall(xPos, yPos, ballDiam, customColor, myBox, myCanvas);
-             ball6.draw();
-           }
-           else if (i == 6)
-           {
-             ball7 = new BoxBall(xPos, yPos, ballDiam, customColor, myBox, myCanvas);
-             ball7.draw();
-           }
-           else if (i == 7)
-           {
-             ball8 = new BoxBall(xPos, yPos, ballDiam, customColor, myBox, myCanvas);
-             ball8.draw();
-           }
-           else if (i == 8)
-           {
-             ball9 = new BoxBall(xPos, yPos, ballDiam, customColor, myBox, myCanvas);
-             ball9.draw();
-           }
-           else if (i == 9)
-           {
-             ball10 = new BoxBall(xPos, yPos, ballDiam, customColor, myBox, myCanvas);
-             ball10.draw();
-           }
-        }
+           
     
         
         // make them bounce
@@ -131,21 +73,9 @@ public class BallDemo
         while (!finished) {
             myCanvas.wait(50);           // small delay
             ball1.move();
-            ball2.move();
-            ball4.move();
-            ball5.move();
-            ball6.move();
-            ball7.move();
-            ball8.move();
-            
-            // stop once ball has travelled a certain distance on x axis
-            if(ball1.getYPosition() >= 400 || ball10.getYPosition() >= 400) {
-                finished = true;
-                }
-            
         }
     }
-    
+    }
     /**
      * Simulate two bouncing balls
      */
