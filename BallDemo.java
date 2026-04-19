@@ -1,11 +1,12 @@
 import java.awt.Color;
 import java.util.Random;
+import java.util.Arrays;
 
 /**
  * Class BallDemo - a short demonstration showing animation with the 
  * Canvas class. 
  *
- * @author Michael Kölling and David J. Barnes
+ * @author Tyler Ferdinand
  * @version 2016.02.29
  */
 
@@ -34,18 +35,20 @@ public class BallDemo
 
     /**
      * boxBounce - simulate 5-50 balls bouncing within a box
-     * 
+     * Random numbers are generated to establish xposition, ypositions, ball diameter, ball color and number of balls
      * @param numOfBalls number of balls to simulate bouncing, clamped between 5-50. 
      */
     public void boxBounce()
     {
         randomGenerator = new Random(); 
-        int ballNumber = randomGenerator.nextInt(9);
+        int ballNumber = randomGenerator.nextInt(4, 29);
         int xPos;
         int yPos;
         int ballDiam;
         Color customColor;
         Box myBox= new Box (100,100,500,400, myCanvas);
+        
+        BoxBall[] balls = new BoxBall[ballNumber];
 
         myCanvas.setVisible(true);
 
@@ -56,25 +59,29 @@ public class BallDemo
         for (int i = 0; i < ballNumber; i++)
         {
            ballDiam = randomGenerator.nextInt(10, 20);
-           xPos = randomGenerator.nextInt(150, 250);
-           yPos = randomGenerator.nextInt(150, 250);
-           int r = randomGenerator.nextInt(225);
-           int b = randomGenerator.nextInt(225);
-           int g = randomGenerator.nextInt(225); 
+           xPos = randomGenerator.nextInt(150, 300);
+           yPos = randomGenerator.nextInt(150, 300);
+           int r = randomGenerator.nextInt(200);
+           int b = randomGenerator.nextInt(200);
+           int g = randomGenerator.nextInt(200); 
            customColor = new Color(r, b, g);
            
-             ball1 = new BoxBall(250, 250, ballDiam, customColor, myBox, myCanvas);
-             ball1.draw();
+           balls[i] = new BoxBall(xPos, yPos, ballDiam, customColor, myBox, myCanvas);
+           balls[i].draw();
            
     
         
-        // make them bounce
+        
+    }
+    // make them bounce
         boolean finished =  false;
         while (!finished) {
             myCanvas.wait(50);           // small delay
-            ball1.move();
+            
+            for(BoxBall ball : balls){
+                ball.move();
+            }
         }
-    }
     }
     /**
      * Simulate two bouncing balls

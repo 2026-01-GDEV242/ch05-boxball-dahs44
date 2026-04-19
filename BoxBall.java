@@ -83,10 +83,9 @@ public class BoxBall
     public void move()
     {
         // remove from canvas at the current position
-        //box.getRightWall();
         
         erase();
-            
+        
         // compute new position
         yPosition += ySpeed;
         xPosition += xSpeed;
@@ -103,7 +102,7 @@ public class BoxBall
                         xSpeed = -xSpeed; 
               }
         // figure out if it has hit the top or bottom wall
-         if (yPosition <= (box.getTopWall() - diameter)) 
+         if (yPosition <= (box.getTopWall())) 
               {
                         yPosition = (box.getTopWall());
                         ySpeed = -ySpeed; 
